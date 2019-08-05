@@ -29,7 +29,34 @@ namespace OrusEvents.Infrastructure
 
                 if (currentEvent != null && currentEvent.Id > 0)
                 {
-                    //var userId = DbContext
+                    var user = DbContext.Users.FirstOrDefault(x => x.Email.ToLower() == registerUserEventRequest.Email.ToLower());
+
+                    if (user == null)
+                    {
+                        //Cria usuário
+                        user = DbContext.Users.Add(new Entities.Users
+                        {
+                            Email = registerUserEventRequest.Email.ToLower(),
+                            Name = null,
+                            Phone = null
+                        }).Entity;
+
+                        await DbContext.SaveChangesAsync();
+                    }
+
+                    var idRegister = await DbContext.Registers.AddAsync(new Entities.Registers
+                    {
+                        Event = currentEvent,
+                        EventId = currentEvent.Id,
+                        User = user,
+                        UserId = user.Id
+                    });
+
+                    registerResponse = Task.FromResult(new RegisterUserEventResponse(idRegister.Entity.Id, true));
+                }
+                else
+                {
+                    registerResponse = Task.FromResult(new RegisterUserEventResponse(null, false, "Não existe evento cadastrado."));
                 }
 
                 return await registerResponse;
@@ -39,10 +66,6 @@ namespace OrusEvents.Infrastructure
                 List<string> errors = new List<string>();
                 errors.Add(ex.Message);
                 return new RegisterUserEventResponse(errors, false, null); ;
-            }
-            finally
-            {
-
             }
         }
     }

@@ -7,7 +7,7 @@ namespace OrusEvents.Infrastructure.Entities
 {
     public partial class Registers
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public int EventId { get; set; }
         public bool Confirmed { get; set; }

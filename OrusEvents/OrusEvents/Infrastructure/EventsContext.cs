@@ -23,6 +23,8 @@ namespace OrusEvents.Infrastructure
         }
 
         public virtual DbSet<Events> Events { get; set; }
+        public virtual DbSet<Registers> Registers { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -49,7 +51,7 @@ namespace OrusEvents.Infrastructure
 
             modelBuilder.Entity<Registers>(entity =>
             {
-                entity.Property(e => e.Id).IsRequired();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Event)
                     .WithMany(p => p.Registers)

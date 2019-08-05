@@ -9,9 +9,9 @@ namespace OrusEvents.Core.Dto
     public class RegisterUserEventRequest : IUseCaseRequest<RegisterUserEventResponse>
     {
         public int Id { get; set; }
-        public int Email { get; set; }
+        public string Email { get; set; }
 
-        public RegisterUserEventRequest(int id , int email)
+        public RegisterUserEventRequest(int id , string email)
         {
             Id = id;
             Email = email;
