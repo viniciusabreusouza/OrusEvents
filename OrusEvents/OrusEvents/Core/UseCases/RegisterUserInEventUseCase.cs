@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace OrusEvents.Core.UseCases
 {
-    public sealed class RegisterUserInEvent : IRegisterUserInEvent
+    public sealed class RegisterUserInEventUseCase : IRegisterUserInEventUseCase
     {
         private readonly IEventsRepository _eventRepository;
 
-        public RegisterUserInEvent(IEventsRepository eventRepository)
+        public RegisterUserInEventUseCase(IEventsRepository eventRepository)
         {
             _eventRepository = eventRepository;
         }

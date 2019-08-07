@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrusEvents.Core.Interfaces.UseCases
 {
-    public interface IRegisterUserInEvent : IUseCaseRequestHandler<RegisterUserEventRequest, RegisterUserEventResponse>
+    public interface IRegisterUserInEventUseCase : IUseCaseRequestHandler<RegisterUserEventRequest, RegisterUserEventResponse>
     {
     }
 }

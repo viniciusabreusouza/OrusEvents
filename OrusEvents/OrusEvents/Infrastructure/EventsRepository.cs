@@ -23,7 +23,7 @@ namespace OrusEvents.Infrastructure
 
             try
             {
-                //Validar Evento no RDStation
+                //Validar Evento no RDStation e como buscar o evento
 
                 var currentEvent = DbContext.Events.FirstOrDefault(x => x.Id == registerUserEventRequest.Id);
 
@@ -38,7 +38,8 @@ namespace OrusEvents.Infrastructure
                         {
                             Email = registerUserEventRequest.Email.ToLower(),
                             Name = null,
-                            Phone = null
+                            Phone = null,
+                            Id = Guid.NewGuid()
                         }).Entity;
 
                         await DbContext.SaveChangesAsync();
@@ -51,6 +52,8 @@ namespace OrusEvents.Infrastructure
                         User = user,
                         UserId = user.Id
                     });
+
+                    await DbContext.SaveChangesAsync();
 
                     registerResponse = Task.FromResult(new RegisterUserEventResponse(idRegister.Entity.Id, true));
                 }

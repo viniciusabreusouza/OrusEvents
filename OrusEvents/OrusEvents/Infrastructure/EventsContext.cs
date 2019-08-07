@@ -77,7 +77,6 @@ namespace OrusEvents.Infrastructure
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
                     .IsUnicode(false);
 
                 entity.Property(e => e.Phone)

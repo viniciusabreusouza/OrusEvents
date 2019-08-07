@@ -7,5 +7,6 @@ namespace OrusEvents.Controllers.Models
 {
     public class RegisterUserEventResponse
     {
+        public Guid IdRegister { get; set; }
     }
 }
