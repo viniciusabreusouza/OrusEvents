@@ -14,8 +14,8 @@ namespace OrusEvents.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        [HttpGet("[action]/{id}")]
+        public IEnumerable<WeatherForecast> WeatherForecasts(string id)
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
