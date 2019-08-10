@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OrusEvents.Core.Dto;
 using OrusEvents.Core.Interfaces.Repositories;
 using System;
@@ -79,10 +80,23 @@ namespace OrusEvents.Infrastructure
 
             try
             {
-                var userInEvent = DbContext.Registers.FirstOrDefault(x => x.Id == registerUserEventRequest.UserId);
+                var userInEvent = DbContext.Registers.Include(x => x.Event).FirstOrDefault(x => x.Id == registerUserEventRequest.UserId);
 
                 if (userInEvent != null)
                 {
+                    if (DateTime.Now > userInEvent.Event.Date)
+                    {
+                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, false, "Data do evento expirada."));
+                        userInEvent.Confirmed = false;
+                        return await registerConfirmation;
+                    }
+
+                    if (userInEvent.Confirmed)
+                    {
+                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, false, "Usuário já confirmado no evento."));
+                        return await registerConfirmation;
+                    }
+
                     userInEvent.Confirmed = true;
 
                     await DbContext.SaveChangesAsync();
