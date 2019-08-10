@@ -21,8 +21,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    FormsModule,
-    
+    FormsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

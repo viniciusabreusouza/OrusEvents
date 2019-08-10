@@ -9,5 +9,6 @@ namespace OrusEvents.Core.Interfaces.Repositories
     public interface IEventsRepository
     {
         Task<RegisterUserEventResponse> PostRegisterUserEvent(RegisterUserEventRequest registerUserEventRequest);
+        Task<RegisterConfirmationEventResponse> PostConfirmationEvent(RegisterConfirmationEventRequest registerUserEventRequest);
     }
 }

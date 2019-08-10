@@ -50,7 +50,8 @@ namespace OrusEvents.Infrastructure
                         Event = currentEvent,
                         EventId = currentEvent.Id,
                         User = user,
-                        UserId = user.Id
+                        UserId = user.Id,
+                        Id = Guid.NewGuid()
                     });
 
                     await DbContext.SaveChangesAsync();
@@ -69,6 +70,36 @@ namespace OrusEvents.Infrastructure
                 List<string> errors = new List<string>();
                 errors.Add(ex.Message);
                 return new RegisterUserEventResponse(errors, false, null); ;
+            }
+        }
+
+        public async Task<RegisterConfirmationEventResponse> PostConfirmationEvent(RegisterConfirmationEventRequest registerUserEventRequest)
+        {
+            Task<RegisterConfirmationEventResponse> registerConfirmation = null;
+
+            try
+            {
+                var userInEvent = DbContext.Registers.FirstOrDefault(x => x.Id == registerUserEventRequest.UserId);
+
+                if (userInEvent != null)
+                {
+                    userInEvent.Confirmed = true;
+
+                    await DbContext.SaveChangesAsync();
+                    registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(true, true));
+                }
+                else
+                {
+                    registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, false, "Usuário não está cadastrado no evento."));
+                }
+
+                return await registerConfirmation;
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return new RegisterConfirmationEventResponse(errors, false, null); ;
             }
         }
     }

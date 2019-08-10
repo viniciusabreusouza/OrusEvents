@@ -53,6 +53,9 @@ namespace OrusEvents
 
             services.AddSingleton<RegisterUserInEventPresenter>();
             services.AddTransient<IRegisterUserInEventUseCase, RegisterUserInEventUseCase>();
+
+            services.AddSingleton<RegisterConfirmationPresenter>();
+            services.AddTransient<IRegisterConfirmationInEventUseCase, RegisterConfirmationInEventUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
