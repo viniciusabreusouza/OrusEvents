@@ -24,7 +24,12 @@ namespace OrusEvents.Controllers.Presenter
             {
                 ContentResult.StatusCode = (int)HttpStatusCode.OK;
             }
-            else if (!string.IsNullOrEmpty(response.Message))
+            else if (!string.IsNullOrEmpty(response.Message) && response.Message == "Usuário já confirmado no evento.")
+            {
+                ContentResult.StatusCode = (int)HttpStatusCode.Conflict;
+                ContentResult.Content = response.Message;
+            }
+            else if (!string.IsNullOrEmpty(response.Message) && response.Message == "Usuário não está cadastrado no evento.")
             {
                 ContentResult.StatusCode = (int)HttpStatusCode.NoContent;
                 ContentResult.Content = response.Message;

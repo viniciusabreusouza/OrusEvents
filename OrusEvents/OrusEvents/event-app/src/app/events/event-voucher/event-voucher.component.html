@@ -2,6 +2,8 @@
   Obrigado por se registrar no evento.
 </h2>
 
-oioio
-  <qrcode [qrdata]="'http://globo.com'" [size]="256" [level]="'M'"></qrcode>
+<h4>
+  {{ userEmail }}
+</h4>
+<ngx-qrcode [qrc-element-type]="elementType" [qrc-value] = "urlConfirmation" qrc-errorCorrectionLevel = "L"></ngx-qrcode>
 

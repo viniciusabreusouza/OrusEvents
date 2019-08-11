@@ -86,14 +86,14 @@ namespace OrusEvents.Infrastructure
                 {
                     if (DateTime.Now > userInEvent.Event.Date)
                     {
-                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, false, "Data do evento expirada."));
+                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, true, "Data do evento expirada."));
                         userInEvent.Confirmed = false;
                         return await registerConfirmation;
                     }
 
                     if (userInEvent.Confirmed)
                     {
-                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, false, "Usuário já confirmado no evento."));
+                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, true, "Usuário já confirmado no evento."));
                         return await registerConfirmation;
                     }
 

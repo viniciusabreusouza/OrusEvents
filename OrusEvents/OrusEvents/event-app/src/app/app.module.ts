@@ -13,8 +13,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { EventVoucherComponent } from './events/event-voucher/event-voucher.component';
-import { QRCodeModule } from 'angularx-qrcode';
 import { EventsService } from './services/event-control/events.service';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { EventsService } from './services/event-control/events.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    QRCodeModule
+    NgxQRCodeModule
   ],
   providers: [LocalStorageService, HomeGuard, EventsService],
   bootstrap: [AppComponent]

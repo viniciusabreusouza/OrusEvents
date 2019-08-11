@@ -22,6 +22,9 @@ export class EventVoucherComponent implements OnInit {
   registerRequest: RegisterUserInEventRequest;
   public urlConfirmation: string = null;
 
+  elementType: 'url';
+  value = 'Techiediaries';
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private eventService: EventsService) { }
@@ -30,7 +33,7 @@ export class EventVoucherComponent implements OnInit {
     this.eventId = this.route.snapshot.params.id;
     this.userEmail = this.route.snapshot.params.email;
 
-    //this.registerUserInEvent(this.eventId, this.userEmail);
+    this.registerUserInEvent(this.eventId, this.userEmail);
   }
 
   registerUserInEvent(eventId: string, userEmail: string): void {

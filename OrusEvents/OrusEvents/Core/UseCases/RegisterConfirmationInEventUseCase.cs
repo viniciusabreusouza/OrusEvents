@@ -22,7 +22,7 @@ namespace OrusEvents.Core.UseCases
         {
             var response = await _eventRepository.PostConfirmationEvent(message);
 
-            outputPort.Handle(response.Success ? new RegisterConfirmationEventResponse(response.Confirmation, true) :
+            outputPort.Handle(response.Success ? new RegisterConfirmationEventResponse(response.Confirmation, true, response.Message) :
                                                  new RegisterConfirmationEventResponse(response.Errors, false, response.Message));
             return response.Success;
         }
