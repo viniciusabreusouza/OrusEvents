@@ -1,0 +1,78 @@
+@import '../sass/variables';
+
+.main-head{
+  height: 150px;
+  background: #FFF;
+}
+
+.sidenav {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.main {
+  padding: 10px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+  .login-form{
+      margin-top: 10%;
+  }
+
+  .register-form{
+      margin-top: 10%;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .main{
+      margin-left: 60%;
+  }
+
+  .sidenav{
+      width: 60%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+  }
+
+  .login-form{
+      margin-top: 30%;
+  }
+
+  .register-form{
+      margin-top: 20%;
+  }
+}
+
+
+.login-main-text{
+  margin-top: 20%;
+  padding: 60px;
+  color: #fff;
+}
+
+.login-main-text h2{
+  font-weight: 300;
+}
+
+.btn-login {
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+  width: 150px;
+  background-color: $colorVerdeMusgo;
+}
+
+.btn-registro{
+  background-color: #66909f !important;
+  color: #fff;
+  margin: 0px 10px 0px 0px;
+}

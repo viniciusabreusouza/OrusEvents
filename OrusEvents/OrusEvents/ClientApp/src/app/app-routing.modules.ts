@@ -8,8 +8,7 @@ const routes: Routes = [
     //{ path: 'login', component: LoginComponent },
     //{ path: 'registrar', component: RegistrarComponent },
     {
-      path: '',
-      component: AppComponent,
+      path: '', component: HomeComponent, pathMatch: 'full',
       children: [
         { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [HomeGuard] },
         { path: 'home', component: HomeComponent, canActivate: [HomeGuard] },

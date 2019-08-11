@@ -33,7 +33,7 @@ namespace OrusEvents
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/dist";
+                configuration.RootPath = "event-app/dist";
             });
 
             //services.AddSwaggerGen(c =>
@@ -47,12 +47,18 @@ namespace OrusEvents
             //    });
             //});
 
-            //Injeção de Dependencia dos Serviços
+            //Injeï¿½ï¿½o de Dependencia dos Serviï¿½os
 
             services.AddTransient<IEventsRepository, EventsRepository>();
 
             services.AddSingleton<RegisterUserInEventPresenter>();
             services.AddTransient<IRegisterUserInEventUseCase, RegisterUserInEventUseCase>();
+
+            services.AddSingleton<RegisterConfirmationPresenter>();
+            services.AddTransient<IRegisterConfirmationInEventUseCase, RegisterConfirmationInEventUseCase>();
+
+            services.AddSingleton<GetRegisterInfoPresenter>();
+            services.AddTransient<IGetRegisterInfoUseCase, GetRegisterInfoUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +91,7 @@ namespace OrusEvents
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "event-app";
 
                 if (env.IsDevelopment())
                 {

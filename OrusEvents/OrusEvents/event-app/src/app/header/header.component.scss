@@ -1,0 +1,53 @@
+@import '../../app/sass/variables';
+
+.bg-light {
+  background-color: $colorWhite !important;
+  height: 56px;
+}
+
+.navbar {
+  height: 56px;
+  margin-left: 296px;
+}
+
+.ajuste-posicao {
+  margin-right: 30px;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar {
+    margin-left: 110px;
+  }
+}
+
+#btnSair {
+  height: 37px;
+  width: 96px;
+  background-color: $colorPalatinateBlue;
+  color: $colorWhite;
+  margin: 15px 20px 20px 70px;
+}
+
+#btnFecharModal {
+  height: 37px;
+  width: 96px;
+  background-color: $colorTuquoiseGreen;
+  color: $colorWhite;
+  margin: 15px 70px 20px 20px;
+}
+
+#txtModal {
+  font-weight:bold;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color:  $colorPalatinateBlue;
+  text-align: center;
+}
+
+.link-logout {
+ cursor: pointer;
+}

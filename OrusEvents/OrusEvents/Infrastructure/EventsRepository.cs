@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OrusEvents.Core.Dto;
 using OrusEvents.Core.Interfaces.Repositories;
 using System;
@@ -50,7 +51,8 @@ namespace OrusEvents.Infrastructure
                         Event = currentEvent,
                         EventId = currentEvent.Id,
                         User = user,
-                        UserId = user.Id
+                        UserId = user.Id,
+                        Id = Guid.NewGuid()
                     });
 
                     await DbContext.SaveChangesAsync();
@@ -69,6 +71,84 @@ namespace OrusEvents.Infrastructure
                 List<string> errors = new List<string>();
                 errors.Add(ex.Message);
                 return new RegisterUserEventResponse(errors, false, null); ;
+            }
+        }
+
+        public async Task<RegisterConfirmationEventResponse> PostConfirmationEvent(RegisterConfirmationEventRequest registerUserEventRequest)
+        {
+            Task<RegisterConfirmationEventResponse> registerConfirmation = null;
+
+            try
+            {
+                var userInEvent = DbContext.Registers.Include(x => x.Event).FirstOrDefault(x => x.Id == registerUserEventRequest.RegisterId);
+
+                if (userInEvent != null)
+                {
+                    if (DateTime.Now > userInEvent.Event.Date)
+                    {
+                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, true, "Data do evento expirada."));
+                        userInEvent.Confirmed = false;
+                        return await registerConfirmation;
+                    }
+
+                    if (userInEvent.Confirmed)
+                    {
+                        registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, true, "Usuário já confirmado no evento."));
+                        return await registerConfirmation;
+                    }
+
+                    userInEvent.Confirmed = true;
+
+                    await DbContext.SaveChangesAsync();
+                    registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(true, true));
+                }
+                else
+                {
+                    registerConfirmation = Task.FromResult(new RegisterConfirmationEventResponse(false, false, "Usuário não está cadastrado no evento."));
+                }
+
+                return await registerConfirmation;
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return new RegisterConfirmationEventResponse(errors, false, null); ;
+            }
+        }
+
+        public async Task<GetRegisterInfoResponse> GetRegisterInformation(GetRegisterInfoRequest registrationInfoRequest)
+        {
+            Task<GetRegisterInfoResponse> getRegisterInfo = null;
+
+            try
+            {
+                var register = DbContext.Registers.Include(x => x.Event).FirstOrDefault(x => x.Id == registrationInfoRequest.RegisterId);
+
+                if (register != null)
+                {
+                    if (DateTime.Now > register.Event.Date)
+                    {
+                        getRegisterInfo = Task.FromResult(new GetRegisterInfoResponse(null, false, "Data do evento expirada."));
+                        return await getRegisterInfo;
+                    }
+
+                    var user = await DbContext.Users.FirstOrDefaultAsync(x => x.Id == register.UserId);
+
+                    getRegisterInfo = Task.FromResult(new GetRegisterInfoResponse(register.EventId, register.Event.Name, register.Event.Date, register.Event.Payed, user.Email, true));
+                }
+                else
+                {
+                    getRegisterInfo = Task.FromResult(new GetRegisterInfoResponse(null, false, "Usuário não está cadastrado no evento."));
+                }
+
+                return await getRegisterInfo;
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return new GetRegisterInfoResponse(errors, false, null); ;
             }
         }
     }

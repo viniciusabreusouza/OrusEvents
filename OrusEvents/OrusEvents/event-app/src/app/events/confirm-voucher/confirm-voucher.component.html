@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Produtos</h2>
+  <div class="produtos">
+    <div>
+      <div class="row">
+        <div class="col">
+          <label>Nome do Evento: </label>
+          <label>{{ registerModel.EventName }}</label>
+        </div>
+        <div class="col">
+          <label for="descricao">E-mail Cadastrado: </label>
+          <label>{{ registerModel.UserEmail }}</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="descricao">Data: </label>
+          <label>{{ registerModel.EventDate | date:'M/d/yy h:mm a' }}</label>
+        </div>
+        <div class="col">
+          <input type="button" name="Confirme" value="Confirmar Presença" (click)="confirmPresence()" />
+        </div>
+      </div>
+      <div class="row">
+        <span style="color:red">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+</div>
