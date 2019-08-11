@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EventVoucherComponent } from './events/event-voucher/event-voucher.component';
 import { EventsService } from './services/event-control/events.service';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { ConfirmVoucherComponent } from './events/confirm-voucher/confirm-voucher.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     HeaderComponent,
     HomeComponent,
     SidebarComponent,
-    EventVoucherComponent
+    EventVoucherComponent,
+    ConfirmVoucherComponent
   ],
   imports: [
     BrowserModule,

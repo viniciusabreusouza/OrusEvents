@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace OrusEvents.Core.Dto
 {
-    public class RegisterConfirmationEventRequest : IUseCaseRequest<RegisterConfirmationEventResponse>
+    public class GetRegisterInfoRequest : IUseCaseRequest<GetRegisterInfoResponse>
     {
         public Guid RegisterId { get; set; }
 
-        public RegisterConfirmationEventRequest(Guid registerId)
+        public GetRegisterInfoRequest(Guid register)
         {
-            RegisterId = registerId;
+            RegisterId = register;
         }
     }
 }

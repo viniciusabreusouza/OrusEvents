@@ -80,7 +80,7 @@ namespace OrusEvents.Infrastructure
 
             try
             {
-                var userInEvent = DbContext.Registers.Include(x => x.Event).FirstOrDefault(x => x.Id == registerUserEventRequest.UserId);
+                var userInEvent = DbContext.Registers.Include(x => x.Event).FirstOrDefault(x => x.Id == registerUserEventRequest.RegisterId);
 
                 if (userInEvent != null)
                 {
@@ -114,6 +114,41 @@ namespace OrusEvents.Infrastructure
                 List<string> errors = new List<string>();
                 errors.Add(ex.Message);
                 return new RegisterConfirmationEventResponse(errors, false, null); ;
+            }
+        }
+
+        public async Task<GetRegisterInfoResponse> GetRegisterInformation(GetRegisterInfoRequest registrationInfoRequest)
+        {
+            Task<GetRegisterInfoResponse> getRegisterInfo = null;
+
+            try
+            {
+                var register = DbContext.Registers.Include(x => x.Event).FirstOrDefault(x => x.Id == registrationInfoRequest.RegisterId);
+
+                if (register != null)
+                {
+                    if (DateTime.Now > register.Event.Date)
+                    {
+                        getRegisterInfo = Task.FromResult(new GetRegisterInfoResponse(null, false, "Data do evento expirada."));
+                        return await getRegisterInfo;
+                    }
+
+                    var user = await DbContext.Users.FirstOrDefaultAsync(x => x.Id == register.UserId);
+
+                    getRegisterInfo = Task.FromResult(new GetRegisterInfoResponse(register.EventId, register.Event.Name, register.Event.Date, register.Event.Payed, user.Email, true));
+                }
+                else
+                {
+                    getRegisterInfo = Task.FromResult(new GetRegisterInfoResponse(null, false, "Usuário não está cadastrado no evento."));
+                }
+
+                return await getRegisterInfo;
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return new GetRegisterInfoResponse(errors, false, null); ;
             }
         }
     }
