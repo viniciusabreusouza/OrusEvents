@@ -5,6 +5,7 @@ import { RegisterUserInEventRequest } from 'src/app/models/events/register-user-
 import { Observable } from 'rxjs';
 import { RegisterUserInEventResponse } from 'src/app/models/events/register-user-event-response.model';
 import { RegisterConfirmationResponse } from 'src/app/models/events/register-confirmation-response.model';
+import { GetRegisterInfoResponse } from 'src/app/models/events/get-register-info-response.model';
 
 
 const urlEvent = 'https://localhost:44357/api/Event/';
@@ -21,7 +22,11 @@ export class EventsService {
     return this.http.post<RegisterUserInEventResponse>(`${urlEvent}/RegisterUserInEvent/${request.eventId}/${request.email}`, null);
   }
 
-  RegisterConfirmationInEvent(request: string): Observable<RegisterConfirmationResponse>{
+  RegisterConfirmationInEvent(request: string): Observable<RegisterConfirmationResponse> {
     return this.http.post<RegisterConfirmationResponse>(`${urlEvent}/RegisterConfirmationInEvent/${request}`, null);
+  }
+
+  GetRegisterInfo(request: string): Observable<GetRegisterInfoResponse> {
+    return this.http.get<GetRegisterInfoResponse>(`${urlEvent}/GetRegisterInfo/${request}`);
   }
 }

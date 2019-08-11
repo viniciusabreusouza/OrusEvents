@@ -78,7 +78,7 @@ namespace OrusEvents.Controllers
         [ProducesResponseType(typeof(void), 400)]
         [ProducesResponseType(typeof(void), 401)]
         [ProducesResponseType(typeof(void), 403)]
-        public async Task<ActionResult> GetRegisterInfor(Guid registerId)
+        public async Task<ActionResult> GetRegisterInfo(Guid registerId)
         {
             if (!ModelState.IsValid)
             { //re-render the view when validation failed.

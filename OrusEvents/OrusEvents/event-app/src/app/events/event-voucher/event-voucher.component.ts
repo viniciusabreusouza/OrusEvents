@@ -46,7 +46,6 @@ export class EventVoucherComponent implements OnInit {
 
       this.registerEvent = this.eventService.RegisterUserInEvent(this.registerRequest).subscribe(
         (data: RegisterUserInEventResponse) => {
-          debugger;
           if (data != null && data.Success) {
 
             this.urlConfirmation = 'https://localhost:44357/api/Event/RegisterConfirmationInEvent/' + data.IdRegister;

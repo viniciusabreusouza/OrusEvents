@@ -19,7 +19,7 @@ const routes: Routes = [
       { path: 'voucher/:id/:email', component: EventVoucherComponent, canActivate: [HomeGuard] },
       { path: 'voucher', component: EventVoucherComponent, canActivate: [HomeGuard] },
       { path: 'confirm-voucher', component: ConfirmVoucherComponent, canActivate: [HomeGuard] },
-      { path: 'confirm-voucher/:id', component: ConfirmVoucherComponent, canActivate: [HomeGuard] },
+      { path: 'confirm-voucher/:registerId', component: ConfirmVoucherComponent, canActivate: [HomeGuard] },
     ]
   }
 ];
