@@ -158,7 +158,18 @@ namespace OrusEvents.Infrastructure
 
             try
             {
-                return null;
+                var user = DbContext.UserMgmts.FirstOrDefault(x => x.Login == loginRequest.User && x.Password == loginRequest.Password);
+
+                if (user != null)
+                {
+                    loginResponse = Task.FromResult(new LoginResponse(user.Id, true));
+                }
+                else
+                {
+                    loginResponse = Task.FromResult(new LoginResponse(0, false, "Usuário ou senha incorretos."));
+                }
+
+                return await loginResponse;
             }
             catch (Exception ex)
             {

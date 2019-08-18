@@ -47,7 +47,7 @@ namespace OrusEvents
             //    });
             //});
 
-            //Inje��o de Dependencia dos Servi�os
+            //Injecao de Dependencia dos servicos
 
             services.AddTransient<IEventsRepository, EventsRepository>();
 
@@ -59,6 +59,9 @@ namespace OrusEvents
 
             services.AddSingleton<GetRegisterInfoPresenter>();
             services.AddTransient<IGetRegisterInfoUseCase, GetRegisterInfoUseCase>();
+
+            services.AddSingleton<LoginPresenter>();
+            services.AddTransient<ILoginUseCase, LoginUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

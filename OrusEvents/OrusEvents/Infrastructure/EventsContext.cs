@@ -26,6 +26,8 @@ namespace OrusEvents.Infrastructure
         public virtual DbSet<Registers> Registers { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
+        public virtual DbSet<UsersMgmt> UserMgmts { get; set; } 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -84,6 +86,17 @@ namespace OrusEvents.Infrastructure
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<UsersMgmt>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsUnicode(false);
+            });
 
         }
     }
