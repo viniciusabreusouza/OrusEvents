@@ -10,7 +10,7 @@ namespace OrusEvents.Core.Interfaces.Repositories
     {
         Task<RegisterUserEventResponse> PostRegisterUserEvent(RegisterUserEventRequest registerUserEventRequest);
         Task<RegisterConfirmationEventResponse> PostConfirmationEvent(RegisterConfirmationEventRequest registerUserEventRequest);
-
         Task<GetRegisterInfoResponse> GetRegisterInformation(GetRegisterInfoRequest registrationInfoRequest);
+        Task<LoginResponse> LoginUser(LoginRequest loginRequest);
     }
 }

@@ -25,6 +25,7 @@ export class ConfirmVoucherComponent implements OnInit {
               private eventService: EventsService) { }
 
   ngOnInit() {
+    debugger
     this.registerId = this.route.snapshot.params.registerId;
 
     this.getRegisterDetails(this.registerId);
@@ -49,13 +50,12 @@ export class ConfirmVoucherComponent implements OnInit {
   }
 
   confirmPresence(): void {
-    debugger
     this.registerConfirmation = this.eventService.RegisterConfirmationInEvent(this.registerId).subscribe(
       (data: RegisterConfirmationResponse) => {
         if (data != null && data.Success) {
 
           if (data.Confirmation) {
-            this.message = "Usuário confirmado com sucesso!";
+            this.message = 'Usuário confirmado com sucesso!';
           }
         }
       },
