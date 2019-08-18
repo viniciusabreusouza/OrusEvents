@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Produtos</h2>
+  <h2>Confirmação de Voucher</h2>
   <div class="produtos">
     <div>
       <div class="row">
@@ -17,8 +17,10 @@
           <label for="descricao">Data: </label>
           <label>{{ registerModel.EventDate | date:'M/d/yy h:mm a' }}</label>
         </div>
-        <div class="col">
-          <input type="button" name="Confirme" value="Confirmar Presença" (click)="confirmPresence()" />
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <input type="button" name="Confirme" value="Confirmar Presença" (click)="confirmPresence()" class="btn btn-success" />
         </div>
       </div>
       <div class="row">
