@@ -151,5 +151,21 @@ namespace OrusEvents.Infrastructure
                 return new GetRegisterInfoResponse(errors, false, null); ;
             }
         }
+
+        public async Task<LoginResponse> LoginUser(LoginRequest loginRequest)
+        {
+            Task<LoginResponse> loginResponse = null;
+
+            try
+            {
+                return null;
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                errors.Add(ex.Message);
+                return new LoginResponse(errors, false, null); ;
+            }
+        }
     }
 }

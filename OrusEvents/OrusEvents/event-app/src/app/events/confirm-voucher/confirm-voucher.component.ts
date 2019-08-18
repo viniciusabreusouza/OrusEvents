@@ -50,13 +50,12 @@ export class ConfirmVoucherComponent implements OnInit {
   }
 
   confirmPresence(): void {
-    debugger
     this.registerConfirmation = this.eventService.RegisterConfirmationInEvent(this.registerId).subscribe(
       (data: RegisterConfirmationResponse) => {
         if (data != null && data.Success) {
 
           if (data.Confirmation) {
-            this.message = "Usuário confirmado com sucesso!";
+            this.message = 'Usuário confirmado com sucesso!';
           }
         }
       },
