@@ -25,7 +25,6 @@ export class ConfirmVoucherComponent implements OnInit {
               private eventService: EventsService) { }
 
   ngOnInit() {
-    debugger
     this.registerId = this.route.snapshot.params.registerId;
 
     this.getRegisterDetails(this.registerId);
